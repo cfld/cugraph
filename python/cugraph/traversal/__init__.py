@@ -16,3 +16,4 @@ from cugraph.traversal.bfs import bfs_edges
 from cugraph.traversal.sssp import sssp
 from cugraph.traversal.sssp import shortest_path
 from cugraph.traversal.sssp import filter_unreachable
+from cugraph.traversal.gunrock_sssp import gunrock_sssp
