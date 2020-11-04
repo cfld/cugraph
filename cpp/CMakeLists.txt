@@ -278,11 +278,11 @@ ExternalProject_Add(cuhornet
 )
 
 # - GUNROCK/ESSENTIALS
-set(ESSENTIALS_DIR ${CMAKE_CURRENT_BINARY_DIR}/cugunrock CACHE STRING
+set(ESSENTIALS_DIR ${CMAKE_CURRENT_BINARY_DIR}/essentials CACHE STRING
   "Path to essentials repo")
 
 ExternalProject_Add(essentials
-  GIT_REPOSITORY    https://github.com/cfld/essentials.git
+  GIT_REPOSITORY    https://github.com/bkj/essentials.git
   GIT_TAG           af79dbdf3b66809d3628bf73613f3d9fda433a1c
   PREFIX            ${ESSENTIALS_DIR}
   CONFIGURE_COMMAND ""
