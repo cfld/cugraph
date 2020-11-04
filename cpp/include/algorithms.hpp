@@ -932,6 +932,12 @@ void hits(GraphCSRView<VT, ET, WT> const &graph,
           WT *hubs,
           WT *authorities);
 
+template <typename VT, typename ET, typename WT>
+void gunrock_sssp(GraphCSRView<VT, ET, WT> const &graph,
+          VT single_source,
+          WT *distances,
+          VT *predecessors);
+
 }  // namespace gunrock
 
 namespace experimental {

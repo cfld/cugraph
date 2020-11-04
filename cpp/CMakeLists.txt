@@ -103,6 +103,7 @@ list(GET GPU_ARCHS -1 ptx)
 set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -gencode arch=compute_${ptx},code=compute_${ptx}")
 
 set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} --expt-extended-lambda")
+set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} --expt-relaxed-constexpr")
 set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -Werror=cross-execution-space-call -Wno-deprecated-declarations -Xptxas --disable-warnings")
 set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -Xcompiler -Wall,-Wno-error=sign-compare,-Wno-error=unused-but-set-variable")
 
@@ -367,6 +368,7 @@ add_library(cugraph SHARED
     src/link_analysis/pagerank.cu
     src/link_analysis/pagerank_1D.cu
     src/link_analysis/gunrock_hits.cpp
+    src/traversal/gunrock_sssp.cu
     src/traversal/bfs.cu
     src/traversal/sssp.cu
     src/link_prediction/jaccard.cu
@@ -419,6 +421,12 @@ target_include_directories(cugraph
     "${CUHORNET_INCLUDE_DIR}/primitives"
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
     "${CUGUNROCK_DIR}/include"
+    
+    "/home/ubuntu/projects/essentials/"
+    "/home/ubuntu/projects/essentials/externals/moderngpu/src"
+    "/home/ubuntu/projects/essentials/externals/rapidjson/include"
+    "/home/ubuntu/projects/essentials/externals/mtx"
+    
     "${NCCL_INCLUDE_DIRS}"
     "${RAFT_DIR}/cpp/include"
     PUBLIC
