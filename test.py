@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from scipy.io import mmread
 
-coo = mmread('/home/ubuntu/projects/essentials/examples/sssp/chesapeake.mtx')
+coo = mmread('datasets/chesapeake.mtx')
 
 src, dst = coo.nonzero()
 weight   = np.ones(src.shape[0]).astype(np.float32)

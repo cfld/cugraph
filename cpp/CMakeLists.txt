@@ -277,7 +277,21 @@ ExternalProject_Add(cuhornet
   INSTALL_COMMAND   ""
 )
 
+# - GUNROCK/ESSENTIALS
+set(ESSENTIALS_DIR ${CMAKE_CURRENT_BINARY_DIR}/cugunrock CACHE STRING
+  "Path to essentials repo")
+
+ExternalProject_Add(essentials
+  GIT_REPOSITORY    https://github.com/cfld/essentials.git
+  GIT_TAG           af79dbdf3b66809d3628bf73613f3d9fda433a1c
+  PREFIX            ${ESSENTIALS_DIR}
+  CONFIGURE_COMMAND ""
+  BUILD_COMMAND     ""
+  INSTALL_COMMAND   ""
+)
+
 # - GUNROCK
+
 set(CUGUNROCK_DIR ${CMAKE_CURRENT_BINARY_DIR}/cugunrock CACHE STRING
   "Path to cugunrock repo")
 
@@ -421,12 +435,10 @@ target_include_directories(cugraph
     "${CUHORNET_INCLUDE_DIR}/primitives"
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
     "${CUGUNROCK_DIR}/include"
-    
-    "/home/ubuntu/projects/essentials/"
-    "/home/ubuntu/projects/essentials/externals/moderngpu/src"
-    "/home/ubuntu/projects/essentials/externals/rapidjson/include"
-    "/home/ubuntu/projects/essentials/externals/mtx"
-    
+    "${ESSENTIALS_DIR}/"
+    "${ESSENTIALS_DIR}/externals/moderngpu/src"
+    "${ESSENTIALS_DIR}/externals/rapidjson/include"
+    "${ESSENTIALS_DIR}/externals/mtx"
     "${NCCL_INCLUDE_DIRS}"
     "${RAFT_DIR}/cpp/include"
     PUBLIC
