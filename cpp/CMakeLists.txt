@@ -278,8 +278,8 @@ ExternalProject_Add(cuhornet
 )
 
 # - GUNROCK/ESSENTIALS
-set(ESSENTIALS_DIR ${CMAKE_CURRENT_BINARY_DIR}/essentials CACHE STRING
-  "Path to essentials repo")
+set(ESSENTIALS_DIR ${CMAKE_CURRENT_BINARY_DIR}/essentials CACHE STRING "Path to essentials repo")
+set(ESSENTIALS_INCLUDE_DIR ${ESSENTIALS_DIR}/essentials/src/essentials CACHE STRING "Path to essentials includes")
 
 ExternalProject_Add(essentials
   GIT_REPOSITORY    https://github.com/bkj/essentials.git
@@ -435,10 +435,10 @@ target_include_directories(cugraph
     "${CUHORNET_INCLUDE_DIR}/primitives"
     "${CMAKE_CURRENT_SOURCE_DIR}/src"
     "${CUGUNROCK_DIR}/include"
-    "${ESSENTIALS_DIR}/"
-    "${ESSENTIALS_DIR}/externals/moderngpu/src"
-    "${ESSENTIALS_DIR}/externals/rapidjson/include"
-    "${ESSENTIALS_DIR}/externals/mtx"
+    "${ESSENTIALS_INCLUDE_DIR}/"
+    "${ESSENTIALS_INCLUDE_DIR}/externals/moderngpu/src"
+    "${ESSENTIALS_INCLUDE_DIR}/externals/rapidjson/include"
+    "${ESSENTIALS_INCLUDE_DIR}/externals/mtx"
     "${NCCL_INCLUDE_DIRS}"
     "${RAFT_DIR}/cpp/include"
     PUBLIC
