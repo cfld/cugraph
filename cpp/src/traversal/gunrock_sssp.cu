@@ -21,7 +21,7 @@ void gunrock_sssp(cugraph::GraphCSRView<vertex_t, edge_t, weight_t> const &graph
   CUGRAPH_EXPECTS(distances != nullptr, "Invalid API parameter: distances array should be of size V");
   CUGRAPH_EXPECTS(predecessors != nullptr, "Invalid API parameter: predecessors array should be of size V");
 
-  auto G = E::graph::build::from_csr_t<E::memory::memory_space_t::device>(
+  auto G = E::graph::build::_from_csr_t<E::memory::memory_space_t::device>(
     graph.number_of_vertices,
     graph.number_of_vertices,
     graph.number_of_edges,
@@ -30,10 +30,13 @@ void gunrock_sssp(cugraph::GraphCSRView<vertex_t, edge_t, weight_t> const &graph
     graph.edge_data
   );
 
-  auto meta = E::graph::build::meta_t<vertex_t, edge_t, weight_t>(
+  auto meta = E::graph::build::_from_csr_t<E::memory::memory_space_t::host, edge_t, vertex_t, weight_t>(
     graph.number_of_vertices,
     graph.number_of_vertices,
-    graph.number_of_edges
+    graph.number_of_edges,
+    nullptr,
+    nullptr,
+    nullptr
   );
 
   float elapsed = E::sssp::run(

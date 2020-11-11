@@ -283,7 +283,7 @@ set(ESSENTIALS_INCLUDE_DIR ${ESSENTIALS_DIR}/src/essentials CACHE STRING "Path t
 
 ExternalProject_Add(essentials
   GIT_REPOSITORY    https://github.com/bkj/essentials.git
-  GIT_TAG           2656bd05c1f372bc9681f2771617026ee7f052c1
+  GIT_TAG           a416545b19c1f64a2b808e0a5d217e1abaa5ece1
   PREFIX            ${ESSENTIALS_DIR}
   CONFIGURE_COMMAND ""
   BUILD_COMMAND     ""
