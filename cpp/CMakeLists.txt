@@ -281,9 +281,11 @@ ExternalProject_Add(cuhornet
 set(ESSENTIALS_DIR ${CMAKE_CURRENT_BINARY_DIR}/essentials CACHE STRING "Path to essentials repo")
 set(ESSENTIALS_INCLUDE_DIR ${ESSENTIALS_DIR}/src/essentials CACHE STRING "Path to essentials includes")
 
+# !! Need to use c++17 for essentials, vs c++14 for rapids -- presumably fixed by proper cmake for essentials?
+set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -DSM_TARGET=61") # !! This should be auto-detected
 ExternalProject_Add(essentials
   GIT_REPOSITORY    https://github.com/bkj/essentials.git
-  GIT_TAG           a416545b19c1f64a2b808e0a5d217e1abaa5ece1
+  GIT_TAG           8c4ebc7cdf1d2dd47ade1877b0fc46662ea14277
   PREFIX            ${ESSENTIALS_DIR}
   CONFIGURE_COMMAND ""
   BUILD_COMMAND     ""

@@ -3,7 +3,7 @@
 
 #include <utilities/error.hpp>
 
-#include <gunrock/applications/sssp/sssp_implementation.hxx>
+#include <gunrock/applications/sssp.hxx>
 
 namespace cugraph {
 
@@ -20,19 +20,8 @@ void gunrock_sssp(cugraph::GraphCSRView<vertex_t, edge_t, weight_t> const &graph
   CUGRAPH_EXPECTS(graph.edge_data != nullptr, "Invalid API parameter: graph.edge_data should be of size V");
   CUGRAPH_EXPECTS(distances != nullptr, "Invalid API parameter: distances array should be of size V");
   CUGRAPH_EXPECTS(predecessors != nullptr, "Invalid API parameter: predecessors array should be of size V");
-  
-  // Ideally:  
-  // auto [G, meta] = graph::build::from_csr_t<memory_space_t::device>(
-  //   graph.number_of_vertices,
-  //   graph.number_of_vertices,
-  //   graph.number_of_edges,
-  //   graph.offsets,
-  //   graph.indices,
-  //   graph.edge_data
-  // );
-  // but don't have C++17 support in build system yet.
-  
-  auto G = E::graph::build::_from_csr_t<E::memory::memory_space_t::device>(
+
+  auto G = E::graph::build::from_csr<E::memory::memory_space_t::device, E::graph::view_t::csr>(
     graph.number_of_vertices,
     graph.number_of_vertices,
     graph.number_of_edges,
@@ -41,21 +30,8 @@ void gunrock_sssp(cugraph::GraphCSRView<vertex_t, edge_t, weight_t> const &graph
     graph.edge_data
   );
 
-  auto meta = E::graph::build::_from_csr_t<E::memory::memory_space_t::host, edge_t, vertex_t, weight_t>(
-    graph.number_of_vertices,
-    graph.number_of_vertices,
-    graph.number_of_edges,
-    nullptr,
-    nullptr,
-    nullptr
-  );
-
   float elapsed = E::sssp::run(
-    G,
-    meta,
-    single_source,
-    distances,
-    predecessors
+    G, single_source, distances, predecessors
   );
 }
 
